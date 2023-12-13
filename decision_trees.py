@@ -46,7 +46,8 @@ def purity_gain(data_before, data_after, impurity_func):
     p_gain = I_r - np.sum(weighted_purities)
     return p_gain
 
-
+def accuracy(partition_1, partition_2): # For classes only!!!
+    return (max(partition_1) + max(partition_2)) / (sum(partition_1) + sum(partition_2))
 
 if __name__ == "__main__":
     # if regression: put the y values inside data_before and partitions
@@ -58,3 +59,4 @@ if __name__ == "__main__":
     data_after = [partition_1, partition_2]
 
     print(f"Purity gain (\delta): {purity_gain(data_before, data_after, impurity_func)}")
+    print(f"Accuracy : {accuracy(partition_1, partition_2)}") # For classes only!!!
