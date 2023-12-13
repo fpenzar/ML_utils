@@ -26,7 +26,7 @@ def J(S, D, N):
     return S / (0.5*(N*(N-1)) - D)
 
 
-def compare(Z, Q):
+def calculate_n(Z, Q):
     z_classes = len(set(list(Z)))
     q_classes = len(set(list(Q)))
     N = len(Z)
@@ -36,6 +36,17 @@ def compare(Z, Q):
         z = Z[i] - 1
         q = Q[i] - 1
         n[z, q] += 1
+    
+    return n
+
+
+def compare(Z, Q):
+    n = calculate_n(Z, Q)
+    # if confusion matrix given, put it in the matrix n below and uncomment
+    # n = np.array([[114, 0, 32],
+    #               [0, 119, 0],
+    #               [8, 0, 60]])
+    N = np.sum(n)
     
     n_z = n.sum(axis=1)
     n_q = n.sum(axis=0)
@@ -54,6 +65,7 @@ def compare(Z, Q):
 
 if __name__ == "__main__":
     # IMPORTANT see notice in entropy function regarding log!!!!!!!!!!!!!!
+    # if the confusion matrix is given, put it in variable n in compare function
     Z = np.array([1, 3, 1, 2, 1, 2, 1, 1, 1, 1])
     Q = np.array([1, 1, 1, 2, 2, 2, 2, 2, 3, 3])
 
